@@ -63,8 +63,6 @@ class AliasPrintTypeCommand(PrintTypeCommand):
     def __init__(self):
         super(AliasPrintTypeCommand, self).__init__("pt")
 
-module_mem = inspect.getmembers(sys.modules[__name__])
-for name, obj in module_mem:
-    if inspect.isclass(obj) and issubclass(obj, BaseCommand) and obj is not BaseCommand:
-        obj()
+[obj() for name, obj in inspect.getmembers(sys.modules[__name__])
+    if inspect.isclass(obj) and issubclass(obj, BaseCommand) and obj is not BaseCommand]
 
